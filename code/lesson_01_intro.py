@@ -1,3 +1,4 @@
 name = "Maida Zaheer"
-goal = "AI Agent Developer"
-print(f"Hi, I am {name} and I will become an {goal}.")
+Dream = "AI automation Specialist"
+problem = "a bakery takes whatsapp orders by hand"
+print(f" Name: {name}\n Dream AI role: {Dream}\n Problem I want to solve: {problem}")
