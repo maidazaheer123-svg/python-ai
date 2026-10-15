@@ -2,7 +2,7 @@
 
 **Name:** Maida Zaheer
 
-**Course Name:** AI Engineering Course
+**Course Name:** AI for Everyone
 
 **My AI Goal:** My goal is to learn AI engineering and build useful AI applications, chatbots, and voice agents.
 
