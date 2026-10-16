@@ -39,3 +39,13 @@ python-ai/
 ├── pyproject.toml    # Project details and dependencies
 ├── uv.lock           # Exact dependency versions
 └── README.md         # Project information and instructions
+
+## Module 1 Project: AI Prompt Kit
+
+A Python tool that turns a local business's details into 3 ready-to-use AI prompts.
+
+**Run:** `uv run code/project_m1_prompt_kit.py`
+
+![Prompt Kit running](docs/project-m1-run.png)
+
+**Who would pay for this:** (one line, e.g. small shop owners who want AI help but don't know what to type)
