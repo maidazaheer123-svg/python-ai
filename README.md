@@ -49,3 +49,15 @@ A Python tool that turns a local business's details into 3 ready-to-use AI promp
 ![Prompt Kit running](docs/project-m1-run.png)
 
 **Who would pay for this:** (one line, e.g. small shop owners who want AI help but don't know what to type)
+
+
+## Business Helper Bot — Intent Design Table
+
+| Intent | Keywords to Check | Bot Reply |
+|---|---|---|
+| Greeting | `hi`, `hello` | Hello! How can I help you? |
+| Timings | `timing`, `hours`, `open` | We are open 10 am to 8 pm, Monday to Saturday. |
+| Fees | `fee`, `price`, `cost` | Consultation fee is 2,000 PKR. |
+| Location | `location`, `address`, `where` | We are located in Lahore. |
+| Appointment | `appointment`, `book`, `booking` | Please call the clinic to book an appointment. |
+| Complaint | `complaint`, `late`, `problem` | Sorry about that. The clinic manager will call you today. |
