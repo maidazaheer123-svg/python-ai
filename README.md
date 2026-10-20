@@ -61,3 +61,21 @@ A Python tool that turns a local business's details into 3 ready-to-use AI promp
 | Location | `location`, `address`, `where` | We are located in Lahore. |
 | Appointment | `appointment`, `book`, `booking` | Please call the clinic to book an appointment. |
 | Complaint | `complaint`, `late`, `problem` | Sorry about that. The clinic manager will call you today. |
+
+## Module 1 Project: Sweet Crumbs Front Desk Assistant
+
+A beginner-friendly Python front desk bot for a bakery that answers FAQs, calculates quotes with bulk discounts and delivery fees, and prepares prompts for unanswered questions.
+
+### Run
+
+```bash
+uv run code/project_m1_front_desk.py
+```
+
+### Screenshot
+
+See `docs/project_m1-part2-run.png` for a sample session. Regenerate or replace it with a screenshot from your own terminal after running the script.
+
+### Value to the owner
+
+The bot can reduce repetitive staff replies and pricing mistakes by answering common questions instantly and calculating quotes consistently; the owner can review the session report to see what customers ask most often.
