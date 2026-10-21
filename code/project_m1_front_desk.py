@@ -18,10 +18,11 @@ print("=" * 50)
 print("Ask anything, type /quote for a price, or bye to exit.")
 
 customer_name = input(f"{BOT_NAME}: What is your name? ").strip().title()
-if customer_name == "":
-    customer_name = "Customer"
 
-# Counters start before the loop so their values are kept for the whole session.
+if customer_name == "":
+    customer_name = "Customer"  # Why: A default name prevents the bot from displaying a blank name.
+
+# Why: Counters are initialized before the loop so they keep track of the entire session.
 messages = 0
 answered_by_rules = 0
 unanswered = 0
@@ -38,7 +39,7 @@ while True:
         print(f"{BOT_NAME}: Please type a question, /quote, or bye.")
         continue
 
-    # Complaints are checked first so unhappy customers get priority.
+    # Why: Complaints are checked first so unhappy customers receive an immediate response.
     if "refund" in message or "complaint" in message or "late" in message:
         complaints += 1
         answered_by_rules += 1
@@ -56,7 +57,7 @@ while True:
         item = input(f"{BOT_NAME}: Which item? ").strip().lower()
         quantity_text = input(f"{BOT_NAME}: How many? ").strip()
 
-        # isdigit() avoids a ValueError when a beginner enters letters for quantity.
+        # Why: isdigit() checks the input before int() so letters do not cause a conversion error.
         if not quantity_text.isdigit():
             print(f"{BOT_NAME}: Please enter the quantity as a whole number, such as 2.")
             answered_by_rules += 1
@@ -87,19 +88,20 @@ while True:
                     subtotal = item_price * quantity
                     discount = 0
 
-                    # The discount is calculated before delivery is checked.
+                    # Why: Bulk orders of 10 or more items receive a 10% discount.
                     if quantity >= 10:
                         discount = subtotal * 0.10
 
                     discounted_subtotal = subtotal - discount
 
-                    # Free delivery is based on the discounted subtotal.
+                    # Why: Delivery is free when the discounted subtotal reaches the limit.
                     if discounted_subtotal >= FREE_DELIVERY_LIMIT:
                         delivery = 0
                     else:
                         delivery = DELIVERY_FEE
 
                     total = discounted_subtotal + delivery
+
                     print(f"{BOT_NAME}: {quantity:,} x {item_name} = {subtotal:,.0f} PKR")
                     print(f"     Discount: -{discount:,.0f} PKR | Delivery: {delivery:,.0f} PKR")
                     print(f"     Total: {total:,.0f} PKR")
@@ -108,7 +110,14 @@ while True:
                     total_quoted_value += total
                     answered_by_rules += 1
 
-    elif message == "hi" or message.startswith("hi ") or message == "hello" or message.startswith("hello ") or message == "salam" or message.startswith("salam "):
+    elif (
+        message == "hi"
+        or message.startswith("hi ")
+        or message == "hello"
+        or message.startswith("hello ")
+        or message == "salam"
+        or message.startswith("salam ")
+    ):
         answered_by_rules += 1
         print(f"{BOT_NAME}: Welcome to Sweet Crumbs! How can I help you?")
 
@@ -122,7 +131,10 @@ while True:
 
     elif "delivery" in message or "deliver" in message or "shipping" in message:
         answered_by_rules += 1
-        print(f"{BOT_NAME}: Delivery costs {DELIVERY_FEE} PKR. It is free for orders of {FREE_DELIVERY_LIMIT:,} PKR or more after discount.")
+        print(
+            f"{BOT_NAME}: Delivery costs {DELIVERY_FEE} PKR. "
+            f"It is free for orders of {FREE_DELIVERY_LIMIT:,} PKR or more after discount."
+        )
 
     elif "contact" in message:
         answered_by_rules += 1
@@ -130,10 +142,12 @@ while True:
 
     else:
         unanswered += 1
+
+        # Why: The prompt is limited to 150 characters to keep it short and manageable.
         clean_question = message.capitalize()[:150]
         estimated_tokens = round(len(clean_question) / 4)
 
-        # Private details stay with a local model; only other questions get a cloud estimate.
+        # Why: Private information is routed locally to avoid sending it to a cloud model.
         if "phone" in message or "cnic" in message or "address" in message:
             chosen_model = LOCAL_MODEL
             estimated_cost = 0.0
@@ -142,13 +156,22 @@ while True:
             estimated_cost = estimated_tokens / 1000 * CLOUD_PRICE_PER_1K_TOKENS
 
         total_ai_cost += estimated_cost
-        print(f"{BOT_NAME}: Good question! Routed to: {chosen_model} (~{estimated_tokens} tokens)")
+
+        print(
+            f"{BOT_NAME}: Good question! Routed to: "
+            f"{chosen_model} (~{estimated_tokens} tokens)"
+        )
+
         print(f"""     Prompt: You are the assistant of {BUSINESS_NAME}.
      Answer {customer_name} in 2 short lines. Question: {clean_question}""")
 
+# Why: The final report summarizes the session and helps the bakery track activity and costs.
 print("=" * 50)
 print("Session report")
-print(f"Messages: {messages} | Answered by rules: {answered_by_rules} | Unanswered: {unanswered}")
+print(
+    f"Messages: {messages} | Answered by rules: {answered_by_rules} "
+    f"| Unanswered: {unanswered}"
+)
 print(f"Quotes: {number_of_quotes} | Quoted value: {total_quoted_value:,.0f} PKR")
 print(f"Estimated AI cost for unanswered questions: {total_ai_cost:.4f} PKR")
 print(f"Complaints received: {complaints}")
