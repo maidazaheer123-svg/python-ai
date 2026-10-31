@@ -7,6 +7,7 @@ and calculates the estimated cost.
 task = input("Task (code / private / chat): ")
 task = task.strip().lower()
 
+ 
 tokens = int(input("Estimated tokens: "))
 paid_user = input("Is this a paid user? (yes/no): ")
 paid_user = paid_user.strip().lower()
