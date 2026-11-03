@@ -79,3 +79,21 @@ See `docs/project_m1-part2-run.png` for a sample session. Regenerate or replace 
 ### Value to the owner
 
 The bot can reduce repetitive staff replies and pricing mistakes by answering common questions instantly and calculating quotes consistently; the owner can review the session report to see what customers ask most often.
+
+## Module 2 Checkpoint 1: AI Content Studio (Sweet Crumbs)
+
+A command-line studio that writes menu descriptions and social media posts for a local bakery, answers prices from real data, and chats with customers using only verified facts.
+
+**Run it:**
+
+```bash
+uv run code/project_m2_content_studio.py
+```
+
+**Screenshot:**
+
+![Full session with report](docs/project-m2-cp1-run.png)
+
+**Value to the owner:** it replaces hours of monthly copywriting with one command, and it never invents a price because prices come straight from the owner's own data, which is why a business would pay for it every month.
+
+**Docs:** [design and feature tests](docs/project-m2-cp1-design.md) · [AI quality results](docs/project-m2-cp1-results.md)
