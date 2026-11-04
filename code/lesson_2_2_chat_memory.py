@@ -1,12 +1,12 @@
-
 """
 Task 2.2: Personal Tutor with Memory
 
 This chatbot remembers the conversation using a messages list.
-It keeps the system instruction and the latest 8 messages.
+The system message is always messages[0], followed by the latest
+8 conversation messages (user and assistant).
 
 Why? To give the AI memory without sending the entire conversation
-again and again.
+again and again, which saves tokens and keeps responses fast.
 """
 
 from langchain_ollama import ChatOllama
@@ -18,27 +18,25 @@ llm = ChatOllama(
     temperature=0.2
 )
 
-# Maximum conversation messages to remember
-MAX_MESSAGES = 8
-
-# System message: tells AI its role and answer length
+# Why messages[0] is the system message? It tells the AI its role, and
+# keeping it at index 0 makes it easy to protect from trimming and /reset.
 messages = [
     SystemMessage(
         content="You are a friendly personal tutor. Give short and simple answers."
     )
 ]
 
-# Store only user questions (stretch requirement)
+# Why a separate list? messages also holds AI replies and the system
+# message, so it can't be used to count only the user's questions.
 questions = []
 
 print("Tutor: Ask me anything. Commands: /reset, /count, bye")
 
 while True:
 
-    # Take input from the user
     user_input = input("You: ").strip()
 
-    # Exit command
+    # Exit command: show the stretch summary
     if user_input.lower() == "bye":
         print("Tutor: Goodbye!")
 
@@ -57,33 +55,30 @@ while True:
         print("Tutor: Memory cleared.")
         continue
 
-    # Count messages in memory
+    # Count messages in memory (includes the system message)
     if user_input.lower() == "/count":
         print(f"Tutor: {len(messages)} messages in memory.")
         continue
 
-    # Save user's question
+    # Save the user's question (stretch)
     questions.append(user_input)
 
-    # Add user message to conversation
+    # Add the user message to the conversation
     messages.append(HumanMessage(content=user_input))
 
     # Send conversation history to AI
     response = llm.invoke(messages)
-
-    # Get AI's reply
     ai_reply = response.content
 
     print("Tutor:", ai_reply)
 
-    # Save AI reply in conversation history
+    # Add the AI reply to the conversation
     messages.append(AIMessage(content=ai_reply))
 
-    # Print input tokens sent to AI
-    usage = response.usage_metadata
-    input_tokens = usage["input_tokens"]
+    # Print the input tokens sent to the AI
+    input_tokens = response.usage_metadata["input_tokens"]
     print(f"(tokens sent: {input_tokens})")
 
-    # Keep system message + latest 8 conversation messages
-    # Why? To control memory and token cost.
-    messages = [messages[0]] + messages[1:][-MAX_MESSAGES:]
+    # Why trim? Every message is re-sent on each turn, so old messages
+    # increase token cost. Keep the system message + latest 8 messages.
+    messages = [messages[0]] + messages[1:][-8:]
