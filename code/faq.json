@@ -1,0 +1,14 @@
+{
+  "business_name": "Sweet Crumbs",
+  "city": "Lahore",
+  "opening_hours": "Every day, 9am to 9pm. Closed on Eid day.",
+  "delivery": "Free delivery for orders over 3,000 PKR. Otherwise 200 PKR within Lahore.",
+  "custom_cakes": "Custom cakes need 48 hours notice. Order by phone or WhatsApp.",
+  "allergens": "Our kitchen uses nuts, milk, eggs and wheat. Please ask for details before ordering.",
+  "prices": {
+    "croissant": 250,
+    "chocolate cake (1 kg)": 2800,
+    "cupcake box (6)": 1200,
+    "birthday cake (2 kg)": 5200
+  }
+}

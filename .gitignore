@@ -8,3 +8,13 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Customer chats and error details must never be pushed
+chat_history.json
+errors.log
+transcript.txt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
