@@ -18,3 +18,14 @@ transcript.txt
 __pycache__/
 *.pyc
 .venv/
+
+# Local customer and operational data
+code/orders.json
+code/transcript.json
+code/errors.log
+
+# Python / environment
+__pycache__/
+*.py[cod]
+.venv/
+.env

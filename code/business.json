@@ -1,0 +1,20 @@
+{
+  "name": "Sweet Cravings Diaries",
+  "type": "Home bakery",
+  "city": "Lahore, Pakistan",
+  "hours": "Orders are handled by arrangement; confirm availability with the owner.",
+  "delivery": "Delivery availability and charges must be confirmed by the owner.",
+  "currency": "PKR",
+  "order_policy": "Every order requires owner approval before it is saved.",
+  "instagram": "sweet.cravings3",
+  "prices": {
+    "brownie": 270,
+    "cupcake": 300,
+    "vanilla cake 1 lb": 1400,
+    "chocolate cream cake 1 lb": 1600,
+    "double chocolate cake 1 lb": 1800,
+    "vanilla cake 2 lb": 2000,
+    "chocolate cream cake 2 lb": 2200,
+    "double chocolate cake 2 lb": 2500
+  }
+}

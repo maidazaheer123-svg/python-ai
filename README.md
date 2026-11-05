@@ -97,3 +97,65 @@ uv run code/project_m2_content_studio.py
 **Value to the owner:** it replaces hours of monthly copywriting with one command, and it never invents a price because prices come straight from the owner's own data, which is why a business would pay for it every month.
 
 **Docs:** [design and feature tests](docs/project-m2-cp1-design.md) · [AI quality results](docs/project-m2-cp1-results.md)
+
+
+# Sweet Cravings Diaries — AI Business Assistant
+
+An Ollama-powered Python agent that answers from bakery owner data, checks orders, imports WhatsApp order messages, and saves orders only after owner approval.
+
+## Run
+
+From the project root, install dependencies into your existing `uv` project as needed. Then:
+
+```cmd
+cd code
+uv run project_m2_business_assistant.py
+```
+
+Make sure Ollama is running and the model is available (default: `gemma3:1b`). Update `MODEL` and `EXTRACTOR_MODEL` in the script if using another installed model.
+
+## Tools
+
+| Tool | What it does |
+|---|---|
+| `get_price` | Reads a price from business.json |
+| `get_info` | Reads business information from business.json |
+| `order_status` | Checks order status in orders.json |
+| `place_order` | Calculates total in Python; asks owner approval before saving |
+
+Commands: `/import`, `/orders`, `/reset`, `bye`.
+
+## Owner data
+Edit `code/business.json` to update menu prices or business facts. The assistant reads this file at startup. Operational records are local and excluded by `.gitignore`.
+
+## Value to the owner
+This assistant reduces daily time spent answering repetitive price and business-information questions, checking incoming order messages, calculating totals, and maintaining order records; a monthly service could be paid for because it saves time while keeping the owner in control of every order.
+
+## Project documents
+- `docs/project-m2-final-design.md` — design, guardrails, and test tables
+- `docs/project-m2-final-results.md` — AI quality tests and improvement record
+
+## Screenshot
+Capture a real terminal session including the session report after running the program. Do not use a fabricated screenshot.
+
+
+# Lesson 2.7 — Order Extractor
+
+Python + Ollama order extraction for Sweet Cravings Diaries.
+
+## Run
+```cmd
+cd code
+uv run lesson_2_7_extractor.py
+```
+Ensure Ollama is running and download the model:
+```cmd
+ollama pull gemma3:1b
+```
+Dependencies expected in the uv project: `langchain-core`, `langchain-ollama`, `ollama`, `httpx`.
+
+Files:
+- `code/lesson_2_7_extractor.py` — extractor
+- `docs/hallucination-hunt.md` — risk tests and run-record template
+
+It also creates `orders.json` and `orders.csv` in the code folder at runtime. Test outputs depend on the local model; record actual findings rather than claiming unrun tests.
